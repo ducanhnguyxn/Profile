@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-widh, initial-scale=1.0">
+    <title>Duc Anh Nguyen - Software Engineer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Midnight Blue -->
+    <!-- Application Structure Plan: A single-page, vertical-scrolling layout with a fixed navigation bar for seamless navigation between sections: Home, About (Education & Experience), Skills, and Projects. This structure is intuitive for recruiters, allowing them to either get a quick overview or dive deep into specific areas. The key interaction is the skills radar chart, which provides a dynamic and visually engaging way to present technical proficiencies. Project cards are clickable, directing users to live websites and code repositories, fostering exploration. -->
+    <!-- Visualization & Content Choices: Summary: Report Info -> Goal -> Viz/Presentation -> Interaction -> Justification. Skills -> Compare/Inform -> Radar Chart -> Hover for details -> Provides a holistic and comparative view of diverse skill sets (languages, frameworks, tools) in one compact visualization (Chart.js). Projects -> Showcase -> Grid of Cards -> Clickable links -> Allows for a clean, organized presentation of work with clear calls-to-action to view the tangible outcomes (HTML/Tailwind). Experience/Education -> Inform Chronologically -> Vertical Timeline -> Scannable narrative -> Presents career and academic progression in an easy-to-digest, linear format (HTML/Tailwind). -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Dark background */
+            color: #c9d1d9; /* Light text */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 80vw;
+            max-height: 500px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            background-color: #3b82f6; /* Blue Accent */
+            border-radius: 50%;
+            border: 3px solid #0d1117;
+        }
+        .gemini-modal-backdrop {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .gemini-modal-content {
+            transition: transform 0.3s ease-in-out;
+        }
+        .spinner {
+            border-color: #3b82f6; /* Blue Accent */
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-gray-900/70 backdrop-blur-md fixed top-0 left-0 right-0 z-50 shadow-lg shadow-black/20">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-white">Duc Anh Nguyen</a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Projects</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-300 focus:outline-none">
+                <span class="w-6 h-0.5 bg-gray-300 block mb-1.5"></span>
+                <span class="w-6 h-0.5 bg-gray-300 block"></span>
+                <span class="w-4 h-0.5 bg-gray-300 block mt-1.5"></span>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900">
+            <a href="#about" class="block py-2 px-6 text-sm text-gray-300 hover:bg-gray-800">About</a>
+            <a href="#skills" class="block py-2 px-6 text-sm text-gray-300 hover:bg-gray-800">Skills</a>
+            <a href="#projects" class="block py-2 px-6 text-sm text-gray-300 hover:bg-gray-800">Projects</a>
+        </div>
+    </header>
+
+    <main class="pt-20">
+
+        <section id="hero" class="py-24">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-10">
+                <div class="flex-shrink-0">
+                    <img src="./scr/ducanh.png" alt="Duc Anh Nguyen">
+                </div>
+                <div class="text-center md:text-left">
+                    <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight">Software Engineer</h1>
+                    <p class="text-xl text-gray-400 mt-4 max-w-2xl">Computer Science student with a passion for building efficient and scalable web applications. Specializing in full-stack development with a focus on AI integration.</p>
+                    <div class="mt-8 flex justify-center md:justify-start items-center flex-wrap gap-4 md:gap-6">
+                         <a href="mailto:ducanhthicau@gmail.com" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">ducanhthicau@gmail.com</a>
+                        <span class="hidden md:block text-gray-700">|</span>
+                        <a href="tel:07428573312" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">07428573312</a>
+                        <span class="hidden md:block text-gray-700">|</span>
+                        <a href="https://www.linkedin.com/in/duc-anh-nguyen-7032b1334/" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">LinkedIn</a>
+                        <span class="hidden md:block text-gray-700">|</span>
+                        <a href="https://github.com/ducanhnguyxn" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white">About Me</h2>
+                    <p class="text-lg text-gray-400 mt-4 max-w-3xl mx-auto">My journey in technology is driven by a blend of academic rigor and hands-on experience. Below is a timeline of my education and professional background.</p>
+                </div>
+                <div class="relative max-w-2xl mx-auto">
+                    <div class="absolute left-0 h-full border-l-2 border-gray-700" style="left: 6px;"></div>
+                    <div class="mb-12 pl-8 relative timeline-item">
+                        <p class="text-sm text-gray-500">2024 - 2027 (Expected)</p>
+                        <h3 class="text-xl font-bold text-white mt-1">BSc (Hons) Computer Science</h3>
+                        <p class="text-md text-gray-400 font-medium">University of Hertfordshire, UK</p>
+                        <ul class="mt-2 list-disc list-inside text-gray-400 space-y-1">
+                            <li>Current Grade: First-Class Honours (3.8/4.5 GPA)</li>
+                            <li>Key Modules: Data Structures & Algorithms, Discrete Maths, Databases.</li>
+                        </ul>
+                    </div>
+                    <div class="pl-8 relative timeline-item">
+                        <p class="text-sm text-gray-500">May 2023 - Aug 2024</p>
+                        <h3 class="text-xl font-bold text-white mt-1">IT Support Assistant (Part-Time)</h3>
+                        <p class="text-md text-gray-400 font-medium">Retail Store, Vietnam</p>
+                        <ul class="mt-2 list-disc list-inside text-gray-400 space-y-1">
+                            <li>Managed IT equipment and software, reducing system downtime by 30%.</li>
+                            <li>Provided technical troubleshooting for POS systems and employee hardware.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-white">Technical Skills</h2>
+                    <p class="text-lg text-gray-400 mt-4 max-w-3xl mx-auto">This visualization represents my proficiency across various technologies, from programming languages to frameworks and tools. It highlights my strengths in creating modern, data-driven applications.</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-white">Projects</h2>
+                    <p class="text-lg text-gray-400 mt-4 max-w-3xl mx-auto">I enjoy bringing ideas to life. Here are a couple of projects I've developed that showcase my ability to build impactful, user-centric applications.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    
+                    <div class="bg-gray-800 rounded-lg p-8 shadow-md hover:shadow-blue-500/10 hover:shadow-xl transition-shadow duration-300 flex flex-col border border-gray-700">
+                        <h3 class="text-2xl font-bold text-white mb-2">CVision - AI CV Review Platform</h3>
+                        <img src="./scr/cvision.png" alt="CVision Screenshot" class="w-full h-48 object-cover rounded-md mb-4">
+                        <p class="text-sm text-gray-500 mb-4">TypeScript, Node.js, Supabase, OpenAI API</p>
+                        <ul class="text-gray-400 space-y-2 list-disc list-inside mb-6 flex-grow">
+                            <li>Reduced CV review time by 60% with AI-powered analysis.</li>
+                            <li>Improved keyword match accuracy for ATS by 45%.</li>
+                            <li>Increased user engagement by 50% via a responsive interface.</li>
+                        </ul>
+                        <div class="flex space-x-4 mt-auto">
+                            <a href="https://cvision.website/" target="_blank" class="inline-block bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors">Website</a>
+                            <a href="https://github.com/ducanhnguyxn/CVision" target="_blank" class="inline-block bg-gray-700 text-gray-300 px-5 py-2 rounded-md hover:bg-gray-600 transition-colors">GitHub</a>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-800 rounded-lg p-8 shadow-md hover:shadow-blue-500/10 hover:shadow-xl transition-shadow duration-300 flex flex-col border border-gray-700">
+                        <h3 class="text-2xl font-bold text-white mb-2">API Movies Tracker</h3>
+                        <img src="./scr/Film.png" alt="API Movies Tracker Screenshot" class="w-full h-48 object-cover rounded-md mb-4">
+                        <p class="text-sm text-gray-500 mb-4">React, JavaScript, Node.js, Appwrite, TMDb API</p>
+                        <ul class="text-gray-400 space-y-2 list-disc list-inside mb-6 flex-grow">
+                             <li>Integrated TMDb API to display over 10,000 movies and shows.</li>
+                             <li>Reduced page load time by 40% with a responsive UI.</li>
+                             <li>Achieved a 4.8/5 average user satisfaction rating in beta.</li>
+                        </ul>
+                        <div class="flex space-x-4 mt-auto">
+                           <a href="https://ducanhnguyxn.github.io/Movies-tracker/" class="inline-block bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors">Website</a>
+                           <a href="https://github.com/ducanhnguyxn/Movies-tracker" class="inline-block bg-gray-700 text-gray-300 px-5 py-2 rounded-md hover:bg-gray-600 transition-colors">GitHub</a>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-8 shadow-md hover:shadow-blue-500/10 hover:shadow-xl transition-shadow duration-300 flex flex-col border border-gray-700">
+                        <h3 class="text-2xl font-bold text-white mb-2">Subcription Tracker</h3>
+                        <img src="./scr/Gemini_Generated_Image_ns8sjuns8sjuns8s.png" alt="Subcription Tracker Screenshot" class="w-full h-48 object-cover rounded-md mb-4">
+                        <p class="text-sm text-gray-500 mb-4">JavaScript, Node.js, MongoDB, Arcjet</p>
+                        <ul class="text-gray-400 space-y-2 list-disc list-inside mb-6 flex-grow">
+                             <li>Engineered a scalable backend for subscription and payment management.</li>
+                             <li> Built robust APIs and integrated database solutions for billing.</li>
+                             <li>Delivers secure, efficient, and reliable subscription processing.</li>
+                        </ul>
+                        <div class="flex space-x-4 mt-auto">
+                           <a href="https://github.com/ducanhnguyxn/subscription-tracker" class="inline-block bg-gray-700 text-gray-300 px-5 py-2 rounded-md hover:bg-gray-600 transition-colors">GitHub</a>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-8 shadow-md hover:shadow-blue-500/10 hover:shadow-xl transition-shadow duration-300 flex flex-col border border-gray-700">
+                        <h3 class="text-2xl font-bold text-white mb-2">Snake Game Python</h3>
+                        <img src="./scr/snake-game-in-python.webp" alt="Snake Game Python Screenshot" class="w-full h-48 object-cover rounded-md mb-4">
+                        <p class="text-sm text-gray-500 mb-4">Python</p>
+                        <ul class="text-gray-400 space-y-2 list-disc list-inside mb-6 flex-grow">
+                             <li>Developed a classic Snake Game with interactive, real-time gameplay.</li>
+                             <li>Implemented game logic, score tracking, and dynamic level progression.</li>
+                             <li>Showcases proficiency in fundamental game development and responsive user experience.</li>
+                        </ul>
+                        <div class="flex space-x-4 mt-auto">
+                        <a href="./scr/test.zip" download class="inline-block bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors">Download ZIP</a>
+                           <a href="https://github.com/ducanhnguyxn/snake-game" class="inline-block bg-gray-700 text-gray-300 px-5 py-2 rounded-md hover:bg-gray-600 transition-colors">GitHub</a>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 py-8">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 Duc Anh Nguyen. Crafted to showcase skills and projects.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('#mobile-menu a, header nav a');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            const skillsCtx = document.getElementById('skillsChart').getContext('2d');
+            const skillsData = {
+                labels: ['Languages', 'Frameworks', 'Databases', 'Tools & AI', 'Soft Skills'],
+                datasets: [{
+                    label: 'Proficiency',
+                    data: [75, 80, 70, 78, 85],
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 2
+                }]
+            };
+
+            new Chart(skillsCtx, {
+                type: 'radar',
+                data: skillsData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { r: { angleLines: { color: '#374151' }, grid: { color: '#374151' }, pointLabels: { font: { size: 14, weight: '500' }, color: '#9ca3af' }, ticks: { backdropColor: 'transparent', stepSize: 20, display: false }, suggestedMin: 0, suggestedMax: 100 } },
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(context) { let label = context.dataset.label || ''; if (label) { label += ': '; } if (context.parsed.r !== null) { label += context.parsed.r + '%'; } return label; } } } }
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
+
